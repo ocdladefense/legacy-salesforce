@@ -403,11 +403,13 @@ class SalesforceController extends ControllerBase
 		$soql->addOption('LIMIT',$batchSize);
 		$soql->addOption('ORDER BY',\setting($pfx.'.breakField'));
 		$soql->setKey(\setting($pfx.'.key'));
+
+	
+		if("Contact" == $oName) {
+			$soql->conditions[] = "(NOT Email LIKE '%qq.com%')";
+		}
 		
 
-		
-		// print $soql."<br />";
-		
 
 		
 		$backup = new ForceBackup();
